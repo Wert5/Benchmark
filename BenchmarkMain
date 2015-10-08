@@ -273,8 +273,10 @@ public class BenchmarkMain {
 			t2=System.nanoTime()-t1;
 			for(int j=0;j<7;j++){
 				t1 =System.nanoTime();
-				CompSumSeqNotS+=seqSearch(data,data.get((int)(Math.random()*i)),i);
-				TimeSumSeqNotS+=System.nanoTime()-t1;
+				comp=seqSearch(data,data.get((int)(Math.random()*i)),i);
+				CompSumSeqNotS+=comp;
+				t2=System.nanoTime()-t1;
+				TimeSumSeqNotS+=t2;
 				if(minCompSumSeqNotS>comp){
 					minCompSumSeqNotS=comp;
 				}
