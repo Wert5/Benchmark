@@ -59,13 +59,13 @@ public class BenchmarkMain {
 			if(minCompSumSeqS>comp){
 				minCompSumSeqS=comp;
 			}
-			if(maxCompSumSeqS>comp){
+			if(maxCompSumSeqS<comp){
 				maxCompSumSeqS=comp;
 			}
 			if(minTimeSumSeqS>t2){
 				minTimeSumSeqS=t2;
 			}
-			if(maxTimeSumSeqS>t2){
+			if(maxTimeSumSeqS<t2){
 				maxTimeSumSeqS=t2;
 			}
 			window.add(new JLabel("t(ns):"+t2+"Compares:"+comp));
@@ -78,13 +78,13 @@ public class BenchmarkMain {
 			if(minCompSumBin>comp){
 				minCompSumBin=comp;
 			}
-			if(maxCompSumBin>comp){
+			if(maxCompSumBin<comp){
 				maxCompSumBin=comp;
 			}
 			if(minTimeSumBin>t2){
 				minTimeSumBin=t2;
 			}
-			if(maxTimeSumBin>t2){
+			if(maxTimeSumBin<t2){
 				maxTimeSumBin=t2;
 			}
 			window.add(new JLabel("t(ns):"+t2+"Compares:"+comp));
@@ -97,13 +97,13 @@ public class BenchmarkMain {
 			if(minCompSumSeqNotS>comp){
 				minCompSumSeqNotS=comp;
 			}
-			if(maxCompSumSeqNotS>comp){
+			if(maxCompSumSeqNotS<comp){
 				maxCompSumSeqNotS=comp;
 			}
 			if(minTimeSumSeqNotS>t2){
 				minTimeSumSeqNotS=t2;
 			}
-			if(maxTimeSumSeqNotS>t2){
+			if(maxTimeSumSeqNotS<t2){
 				maxTimeSumSeqNotS=t2;
 			}
 			window.add(new JLabel("t(ns):"+t2+"Compares:"+comp));
@@ -117,13 +117,13 @@ public class BenchmarkMain {
 			if(minCompSumSeqS>comp){
 				minCompSumSeqS=comp;
 			}
-			if(maxCompSumSeqS>comp){
+			if(maxCompSumSeqS<comp){
 				maxCompSumSeqS=comp;
 			}
 			if(minTimeSumSeqS>t2){
 				minTimeSumSeqS=t2;
 			}
-			if(maxTimeSumSeqS>t2){
+			if(maxTimeSumSeqS<t2){
 				maxTimeSumSeqS=t2;
 			}
 			window.add(new JLabel("t(ns):"+t2+"Compares:"+comp));
@@ -136,13 +136,13 @@ public class BenchmarkMain {
 			if(minCompSumBin>comp){
 				minCompSumBin=comp;
 			}
-			if(maxCompSumBin>comp){
+			if(maxCompSumBin<comp){
 				maxCompSumBin=comp;
 			}
 			if(minTimeSumBin>t2){
 				minTimeSumBin=t2;
 			}
-			if(maxTimeSumBin>t2){
+			if(maxTimeSumBin<t2){
 				maxTimeSumBin=t2;
 			}
 			window.add(new JLabel("t(ns):"+t2+"Compares:"+comp));
@@ -155,13 +155,13 @@ public class BenchmarkMain {
 			if(minCompSumSeqNotS>comp){
 				minCompSumSeqNotS=comp;
 			}
-			if(maxCompSumSeqNotS>comp){
+			if(maxCompSumSeqNotS<comp){
 				maxCompSumSeqNotS=comp;
 			}
 			if(minTimeSumSeqNotS>t2){
 				minTimeSumSeqNotS=t2;
 			}
-			if(maxTimeSumSeqNotS>t2){
+			if(maxTimeSumSeqNotS<t2){
 				maxTimeSumSeqNotS=t2;
 			}
 			window.add(new JLabel("t(ns):"+t2+"Compares:"+comp));
@@ -175,13 +175,13 @@ public class BenchmarkMain {
 			if(minCompSumSeqS>comp){
 				minCompSumSeqS=comp;
 			}
-			if(maxCompSumSeqS>comp){
+			if(maxCompSumSeqS<comp){
 				maxCompSumSeqS=comp;
 			}
 			if(minTimeSumSeqS>t2){
 				minTimeSumSeqS=t2;
 			}
-			if(maxTimeSumSeqS>t2){
+			if(maxTimeSumSeqS<t2){
 				maxTimeSumSeqS=t2;
 			}
 			window.add(new JLabel("t(ns):"+t2+"Compares:"+comp));
@@ -194,13 +194,13 @@ public class BenchmarkMain {
 			if(minCompSumBin>comp){
 				minCompSumBin=comp;
 			}
-			if(maxCompSumBin>comp){
+			if(maxCompSumBin<comp){
 				maxCompSumBin=comp;
 			}
 			if(minTimeSumBin>t2){
 				minTimeSumBin=t2;
 			}
-			if(maxTimeSumBin>t2){
+			if(maxTimeSumBin<t2){
 				maxTimeSumBin=t2;
 			}
 			window.add(new JLabel("t(ns):"+t2+"Compares:"+comp));
@@ -213,13 +213,13 @@ public class BenchmarkMain {
 			if(minCompSumSeqNotS>comp){
 				minCompSumSeqNotS=comp;
 			}
-			if(maxCompSumSeqNotS>comp){
+			if(maxCompSumSeqNotS<comp){
 				maxCompSumSeqNotS=comp;
 			}
 			if(minTimeSumSeqNotS>t2){
 				minTimeSumSeqNotS=t2;
 			}
-			if(maxTimeSumSeqNotS>t2){
+			if(maxTimeSumSeqNotS<t2){
 				maxTimeSumSeqNotS=t2;
 			}
 			window.add(new JLabel("t(ns):"+t2+"Compares:"+comp));
@@ -232,13 +232,13 @@ public class BenchmarkMain {
 				if(minCompSumSeqS>comp){
 					minCompSumSeqS=comp;
 				}
-				if(maxCompSumSeqS>comp){
+				if(maxCompSumSeqS<comp){
 					maxCompSumSeqS=comp;
 				}
 				if(minTimeSumSeqS>t2){
 					minTimeSumSeqS=t2;
 				}
-				if(maxTimeSumSeqS>t2){
+				if(maxTimeSumSeqS<t2){
 					maxTimeSumSeqS=t2;
 				}
 			}
@@ -251,13 +251,13 @@ public class BenchmarkMain {
 				if(minCompSumBin>comp){
 					minCompSumBin=comp;
 				}
-				if(maxCompSumBin>comp){
+				if(maxCompSumBin<comp){
 					maxCompSumBin=comp;
 				}
 				if(minTimeSumBin>t2){
 					minTimeSumBin=t2;
 				}
-				if(maxTimeSumBin>t2){
+				if(maxTimeSumBin<t2){
 					maxTimeSumBin=t2;
 				}
 			}
@@ -273,13 +273,13 @@ public class BenchmarkMain {
 				if(minCompSumSeqNotS>comp){
 					minCompSumSeqNotS=comp;
 				}
-				if(maxCompSumSeqNotS>comp){
+				if(maxCompSumSeqNotS<comp){
 					maxCompSumSeqNotS=comp;
 				}
 				if(minTimeSumSeqNotS>t2){
 					minTimeSumSeqNotS=t2;
 				}
-				if(maxTimeSumSeqNotS>t2){
+				if(maxTimeSumSeqNotS<t2){
 					maxTimeSumSeqNotS=t2;
 				}
 			}
