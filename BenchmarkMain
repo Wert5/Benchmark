@@ -45,7 +45,7 @@ public class BenchmarkMain {
 			long maxTimeSumSeqS=0;
 			long maxTimeSumBin=0;
 			long maxTimeSumSeqNotS=0;
-			window.setLayout(new GridLayout(7,4));
+			window.setLayout(new GridLayout(8,4));
 			//window.setLayout(new FlowLayout());
 			window.add(new JLabel("Target"));
 			window.add(new JLabel("Sequential(sorted)"));
@@ -300,6 +300,10 @@ public class BenchmarkMain {
 			window.add(new JLabel("t(ns):"+minTimeSumSeqS+"Compares:"+minCompSumSeqS));
 			window.add(new JLabel("t(ns):"+minTimeSumBin+"Compares:"+minCompSumBin));
 			window.add(new JLabel("t(ns):"+minTimeSumSeqNotS+"Compares:"+minCompSumSeqNotS));
+			window.add(new JLabel("Big O"));
+			window.add(new JLabel(""+(i)));
+			window.add(new JLabel(""+(Math.log(i)/Math.log(2))));
+			window.add(new JLabel(""+(i)));
 		}
 	}
 	
