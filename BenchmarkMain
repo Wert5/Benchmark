@@ -10,10 +10,11 @@ public class BenchmarkMain {
 		JFrame window= new JFrame("Benchmarks");
 		window.setVisible(true);
 		window.setSize(500,500);
+		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//window.setLayout(new FlowLayout());
 		//window.add(new JLabel("Setting up test array"));
 		ArrayList<String> data= new ArrayList<String>();
-		for(int i=0;i<1000000;i++){
+		for(int i=0;i<250000;i++){
 			data.add(nameGen());
 		}
 		ArrayList<String> dataSorted= new ArrayList<String>(data);
@@ -24,11 +25,16 @@ public class BenchmarkMain {
 			String firstS=dataSorted.get(0);
 			String firstNotS=data.get(0);
 			String notThere="w";
-			window.setLayout(new GridLayout(7,2));
+			long TimeSumSeqS=0;
+			long TimeSumBin=0;
+			long TimeSumSeqNotS=0;
+			window.setLayout(new GridLayout(5,4));
+			//window.setLayout(new FlowLayout());
 			window.add(new JLabel("Target"));
-			window.add(new JLabel("Sequential"));
+			window.add(new JLabel("Sequential(sorted)"));
 			window.add(new JLabel("Binary"));
-			window.add(new JLabel("Middle(Sorted)"));
+			window.add(new JLabel("Sequential(unsorted)"));
+			window.add(new JLabel("Middle"));
 			long t1 =System.nanoTime();
 			seqSearch(dataSorted,midSort,i);
 			long t2=System.nanoTime()-t1;
@@ -38,7 +44,12 @@ public class BenchmarkMain {
 			binarySearch(dataSorted,midSort,i);
 			t2=System.nanoTime()-t1;
 			window.add(new JLabel(t2+""));
-			window.add(new JLabel("First(Sorted)"));
+			window.repaint();
+			t1 =System.nanoTime();
+			seqSearch(data,midNotS,i);
+			t2=System.nanoTime()-t1;
+			window.add(new JLabel(t2+""));
+			window.add(new JLabel("First"));
 			window.repaint();
 			t1 =System.nanoTime();
 			seqSearch(dataSorted,firstS,i);
@@ -49,7 +60,12 @@ public class BenchmarkMain {
 			binarySearch(dataSorted,firstS,i);
 			t2=System.nanoTime()-t1;
 			window.add(new JLabel(t2+""));
-			window.add(new JLabel("NotThere(Sorted)"));
+			window.repaint();
+			t1 =System.nanoTime();
+			seqSearch(data,firstNotS,i);
+			t2=System.nanoTime()-t1;
+			window.add(new JLabel(t2+""));
+			window.add(new JLabel("NotThere"));
 			window.repaint();
 			t1 =System.nanoTime();
 			seqSearch(dataSorted,notThere,i);
@@ -60,36 +76,38 @@ public class BenchmarkMain {
 			binarySearch(dataSorted,notThere,i);
 			t2=System.nanoTime()-t1;
 			window.add(new JLabel(t2+""));
-			window.add(new JLabel("First(Unsorted)"));
-			window.repaint();
-			t1 =System.nanoTime();
-			seqSearch(data,firstNotS,i);
-			t2=System.nanoTime()-t1;
-			window.add(new JLabel(t2+""));
-			window.add(new JLabel("----"));
-			window.add(new JLabel("Middle(Unsorted)"));
-			window.repaint();
-			t1 =System.nanoTime();
-			seqSearch(data,midNotS,i);
-			t2=System.nanoTime()-t1;
-			window.add(new JLabel(t2+""));
-			window.add(new JLabel("----"));
-			window.add(new JLabel("NotThere(Unsorted)"));
 			window.repaint();
 			t1 =System.nanoTime();
 			seqSearch(data,notThere,i);
 			t2=System.nanoTime()-t1;
 			window.add(new JLabel(t2+""));
-			window.add(new JLabel("----"));
+			window.add(new JLabel("Average"));
+			window.repaint();
+			t1 =System.nanoTime();
+			seqSearch(dataSorted,notThere,i);
+			t2=System.nanoTime()-t1;
+			window.add(new JLabel(t2+""));
+			window.repaint();
+			t1 =System.nanoTime();
+			binarySearch(dataSorted,notThere,i);
+			t2=System.nanoTime()-t1;
+			window.add(new JLabel(t2+""));
+			window.repaint();
+			t1 =System.nanoTime();
+			seqSearch(data,notThere,i);
+			t2=System.nanoTime()-t1;
+			window.add(new JLabel(t2+""));
+			window.repaint();
 		}
 	}
 	
 	private static int binarySearch(ArrayList<String> a, String b, int len){
+		int numcom=1;
 		int s=0;
 		int m=len/2;
 		int e=len;
 		int comp=1;
-		while((comp=a.get(m).compareTo(b))!=0 && s!=e){
+		while((comp=a.get(m).compareTo(b))!=0 && s<e-1){
 			if(comp<0){
 				s=m;
 				m=(s+e)/2;
@@ -97,20 +115,21 @@ public class BenchmarkMain {
 				e=m;
 				m=(s+e)/2;
 			}
+			numcom++;
+			//System.out.println("s:"+s);
+			//System.out.println("e:"+e+"\n");
 		}
-		if(comp!=0){
-			return -1;
-		}
-		return m;
+		return numcom;
 	}
 	
 	private static int seqSearch(ArrayList<String> a, String b, int len){
-		for(int i=0; i<len; i++){
+		int i=0;
+		for(; i<len; i++){
 			if(a.get(i).equals(b)){
 				return i;
 			}
 		}
-		return -1;
+		return i;
 	}
 	
 	private static String nameGen(){
