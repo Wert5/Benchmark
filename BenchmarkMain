@@ -7,10 +7,7 @@ import javax.swing.*;
 public class BenchmarkMain {
 
 	public static void main(String[] args){
-		JFrame window= new JFrame("Benchmarks");
-		window.setVisible(true);
-		window.setSize(500,500);
-		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		JFrame window=null;
 		//window.setLayout(new FlowLayout());
 		//window.add(new JLabel("Setting up test array"));
 		ArrayList<String> data= new ArrayList<String>();
@@ -19,7 +16,11 @@ public class BenchmarkMain {
 		}
 		ArrayList<String> dataSorted= new ArrayList<String>(data);
 		Collections.sort(dataSorted);
-		for(int i: new int[] {1000}){
+		for(int i: new int[] {1000,100000,250000}){
+			window= new JFrame("Benchmarks-"+i);
+			window.setVisible(true);
+			window.setSize(500,500);
+			window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			String midSort= dataSorted.get(i/2);
 			String midNotS= data.get(i/2);
 			String firstS=dataSorted.get(0);
@@ -28,7 +29,22 @@ public class BenchmarkMain {
 			long TimeSumSeqS=0;
 			long TimeSumBin=0;
 			long TimeSumSeqNotS=0;
-			window.setLayout(new GridLayout(5,4));
+			int CompSumSeqS=0;
+			int CompSumBin=0;
+			int CompSumSeqNotS=0;
+			int minCompSumSeqS=Integer.MAX_VALUE;
+			int minCompSumBin=Integer.MAX_VALUE;
+			int minCompSumSeqNotS=Integer.MAX_VALUE;
+			int maxCompSumSeqS=0;
+			int maxCompSumBin=0;
+			int maxCompSumSeqNotS=0;
+			long minTimeSumSeqS=Long.MAX_VALUE;
+			long minTimeSumBin=Long.MAX_VALUE;
+			long minTimeSumSeqNotS=Long.MAX_VALUE;
+			long maxTimeSumSeqS=0;
+			long maxTimeSumBin=0;
+			long maxTimeSumSeqNotS=0;
+			window.setLayout(new GridLayout(7,4));
 			//window.setLayout(new FlowLayout());
 			window.add(new JLabel("Target"));
 			window.add(new JLabel("Sequential(sorted)"));
@@ -36,68 +52,247 @@ public class BenchmarkMain {
 			window.add(new JLabel("Sequential(unsorted)"));
 			window.add(new JLabel("Middle"));
 			long t1 =System.nanoTime();
-			seqSearch(dataSorted,midSort,i);
+			int comp=seqSearch(dataSorted,midSort,i);
 			long t2=System.nanoTime()-t1;
-			window.add(new JLabel(t2+""));
+			TimeSumSeqS+=t2;
+			CompSumSeqS+=comp;
+			if(minCompSumSeqS>comp){
+				minCompSumSeqS=comp;
+			}
+			if(maxCompSumSeqS>comp){
+				maxCompSumSeqS=comp;
+			}
+			if(minTimeSumSeqS>t2){
+				minTimeSumSeqS=t2;
+			}
+			if(maxTimeSumSeqS>t2){
+				maxTimeSumSeqS=t2;
+			}
+			window.add(new JLabel("t(ns):"+t2+"Compares:"+comp));
 			window.repaint();
 			t1 =System.nanoTime();
-			binarySearch(dataSorted,midSort,i);
+			comp=binarySearch(dataSorted,midSort,i);
 			t2=System.nanoTime()-t1;
-			window.add(new JLabel(t2+""));
+			TimeSumBin+=t2;
+			CompSumBin+=comp;
+			if(minCompSumBin>comp){
+				minCompSumBin=comp;
+			}
+			if(maxCompSumBin>comp){
+				maxCompSumBin=comp;
+			}
+			if(minTimeSumBin>t2){
+				minTimeSumBin=t2;
+			}
+			if(maxTimeSumBin>t2){
+				maxTimeSumBin=t2;
+			}
+			window.add(new JLabel("t(ns):"+t2+"Compares:"+comp));
 			window.repaint();
 			t1 =System.nanoTime();
-			seqSearch(data,midNotS,i);
+			comp=seqSearch(data,midNotS,i);
 			t2=System.nanoTime()-t1;
-			window.add(new JLabel(t2+""));
+			TimeSumSeqNotS+=t2;
+			CompSumSeqNotS+=comp;
+			if(minCompSumSeqNotS>comp){
+				minCompSumSeqNotS=comp;
+			}
+			if(maxCompSumSeqNotS>comp){
+				maxCompSumSeqNotS=comp;
+			}
+			if(minTimeSumSeqNotS>t2){
+				minTimeSumSeqNotS=t2;
+			}
+			if(maxTimeSumSeqNotS>t2){
+				maxTimeSumSeqNotS=t2;
+			}
+			window.add(new JLabel("t(ns):"+t2+"Compares:"+comp));
 			window.add(new JLabel("First"));
 			window.repaint();
 			t1 =System.nanoTime();
-			seqSearch(dataSorted,firstS,i);
+			comp=seqSearch(dataSorted,firstS,i);
 			t2=System.nanoTime()-t1;
-			window.add(new JLabel(t2+""));
+			TimeSumSeqS+=t2;
+			CompSumSeqS+=comp;
+			if(minCompSumSeqS>comp){
+				minCompSumSeqS=comp;
+			}
+			if(maxCompSumSeqS>comp){
+				maxCompSumSeqS=comp;
+			}
+			if(minTimeSumSeqS>t2){
+				minTimeSumSeqS=t2;
+			}
+			if(maxTimeSumSeqS>t2){
+				maxTimeSumSeqS=t2;
+			}
+			window.add(new JLabel("t(ns):"+t2+"Compares:"+comp));
 			window.repaint();
 			t1 =System.nanoTime();
-			binarySearch(dataSorted,firstS,i);
+			comp=binarySearch(dataSorted,firstS,i);
 			t2=System.nanoTime()-t1;
-			window.add(new JLabel(t2+""));
+			TimeSumBin+=t2;
+			CompSumBin+=comp;
+			if(minCompSumBin>comp){
+				minCompSumBin=comp;
+			}
+			if(maxCompSumBin>comp){
+				maxCompSumBin=comp;
+			}
+			if(minTimeSumBin>t2){
+				minTimeSumBin=t2;
+			}
+			if(maxTimeSumBin>t2){
+				maxTimeSumBin=t2;
+			}
+			window.add(new JLabel("t(ns):"+t2+"Compares:"+comp));
 			window.repaint();
 			t1 =System.nanoTime();
-			seqSearch(data,firstNotS,i);
+			comp=seqSearch(data,firstNotS,i);
 			t2=System.nanoTime()-t1;
-			window.add(new JLabel(t2+""));
+			TimeSumSeqNotS+=t2;
+			CompSumSeqNotS+=comp;
+			if(minCompSumSeqNotS>comp){
+				minCompSumSeqNotS=comp;
+			}
+			if(maxCompSumSeqNotS>comp){
+				maxCompSumSeqNotS=comp;
+			}
+			if(minTimeSumSeqNotS>t2){
+				minTimeSumSeqNotS=t2;
+			}
+			if(maxTimeSumSeqNotS>t2){
+				maxTimeSumSeqNotS=t2;
+			}
+			window.add(new JLabel("t(ns):"+t2+"Compares:"+comp));
 			window.add(new JLabel("NotThere"));
 			window.repaint();
 			t1 =System.nanoTime();
-			seqSearch(dataSorted,notThere,i);
+			comp=seqSearch(dataSorted,notThere,i);
 			t2=System.nanoTime()-t1;
-			window.add(new JLabel(t2+""));
+			TimeSumSeqS+=t2;
+			CompSumSeqS+=comp;
+			if(minCompSumSeqS>comp){
+				minCompSumSeqS=comp;
+			}
+			if(maxCompSumSeqS>comp){
+				maxCompSumSeqS=comp;
+			}
+			if(minTimeSumSeqS>t2){
+				minTimeSumSeqS=t2;
+			}
+			if(maxTimeSumSeqS>t2){
+				maxTimeSumSeqS=t2;
+			}
+			window.add(new JLabel("t(ns):"+t2+"Compares:"+comp));
 			window.repaint();
 			t1 =System.nanoTime();
-			binarySearch(dataSorted,notThere,i);
+			comp=binarySearch(dataSorted,notThere,i);
 			t2=System.nanoTime()-t1;
-			window.add(new JLabel(t2+""));
+			TimeSumBin+=t2;
+			CompSumBin+=comp;
+			if(minCompSumBin>comp){
+				minCompSumBin=comp;
+			}
+			if(maxCompSumBin>comp){
+				maxCompSumBin=comp;
+			}
+			if(minTimeSumBin>t2){
+				minTimeSumBin=t2;
+			}
+			if(maxTimeSumBin>t2){
+				maxTimeSumBin=t2;
+			}
+			window.add(new JLabel("t(ns):"+t2+"Compares:"+comp));
 			window.repaint();
 			t1 =System.nanoTime();
-			seqSearch(data,notThere,i);
+			comp=seqSearch(data,notThere,i);
 			t2=System.nanoTime()-t1;
-			window.add(new JLabel(t2+""));
+			TimeSumSeqNotS+=t2;
+			CompSumSeqNotS+=comp;
+			if(minCompSumSeqNotS>comp){
+				minCompSumSeqNotS=comp;
+			}
+			if(maxCompSumSeqNotS>comp){
+				maxCompSumSeqNotS=comp;
+			}
+			if(minTimeSumSeqNotS>t2){
+				minTimeSumSeqNotS=t2;
+			}
+			if(maxTimeSumSeqNotS>t2){
+				maxTimeSumSeqNotS=t2;
+			}
+			window.add(new JLabel("t(ns):"+t2+"Compares:"+comp));
 			window.add(new JLabel("Average"));
 			window.repaint();
-			t1 =System.nanoTime();
-			seqSearch(dataSorted,notThere,i);
-			t2=System.nanoTime()-t1;
-			window.add(new JLabel(t2+""));
+			for(int j=0;j<7;j++){
+				t1 =System.nanoTime();
+				CompSumSeqS+=comp=seqSearch(dataSorted,dataSorted.get((int)(Math.random()*i)),i);
+				TimeSumSeqS+=t2=System.nanoTime()-t1;
+				if(minCompSumSeqS>comp){
+					minCompSumSeqS=comp;
+				}
+				if(maxCompSumSeqS>comp){
+					maxCompSumSeqS=comp;
+				}
+				if(minTimeSumSeqS>t2){
+					minTimeSumSeqS=t2;
+				}
+				if(maxTimeSumSeqS>t2){
+					maxTimeSumSeqS=t2;
+				}
+			}
+			window.add(new JLabel("t(ns):"+TimeSumSeqS/10+"Compares:"+CompSumSeqS/10));
+			window.repaint();
+			for(int j=0;j<7;j++){
+				t1 =System.nanoTime();
+				CompSumBin+=binarySearch(dataSorted,dataSorted.get((int)(Math.random()*i)),i);
+				TimeSumBin+=System.nanoTime()-t1;
+				if(minCompSumBin>comp){
+					minCompSumBin=comp;
+				}
+				if(maxCompSumBin>comp){
+					maxCompSumBin=comp;
+				}
+				if(minTimeSumBin>t2){
+					minTimeSumBin=t2;
+				}
+				if(maxTimeSumBin>t2){
+					maxTimeSumBin=t2;
+				}
+			}
+			window.add(new JLabel("t(ns):"+TimeSumBin/10+"Compares:"+CompSumBin/10));
 			window.repaint();
 			t1 =System.nanoTime();
-			binarySearch(dataSorted,notThere,i);
+			comp=seqSearch(data,notThere,i);
 			t2=System.nanoTime()-t1;
-			window.add(new JLabel(t2+""));
+			for(int j=0;j<7;j++){
+				t1 =System.nanoTime();
+				CompSumSeqNotS+=seqSearch(data,data.get((int)(Math.random()*i)),i);
+				TimeSumSeqNotS+=System.nanoTime()-t1;
+				if(minCompSumSeqNotS>comp){
+					minCompSumSeqNotS=comp;
+				}
+				if(maxCompSumSeqNotS>comp){
+					maxCompSumSeqNotS=comp;
+				}
+				if(minTimeSumSeqNotS>t2){
+					minTimeSumSeqNotS=t2;
+				}
+				if(maxTimeSumSeqNotS>t2){
+					maxTimeSumSeqNotS=t2;
+				}
+			}
+			window.add(new JLabel("t(ns):"+TimeSumSeqNotS/10+"Compares:"+CompSumSeqNotS/10));
 			window.repaint();
-			t1 =System.nanoTime();
-			seqSearch(data,notThere,i);
-			t2=System.nanoTime()-t1;
-			window.add(new JLabel(t2+""));
-			window.repaint();
+			window.add(new JLabel("Worst"));
+			window.add(new JLabel("t(ns):"+maxTimeSumSeqS+"Compares:"+maxCompSumSeqS));
+			window.add(new JLabel("t(ns):"+maxTimeSumBin+"Compares:"+maxCompSumBin));
+			window.add(new JLabel("t(ns):"+maxTimeSumSeqNotS+"Compares:"+maxCompSumSeqNotS));
+			window.add(new JLabel("Best"));
+			window.add(new JLabel("t(ns):"+minTimeSumSeqS+"Compares:"+minCompSumSeqS));
+			window.add(new JLabel("t(ns):"+minTimeSumBin+"Compares:"+minCompSumBin));
+			window.add(new JLabel("t(ns):"+minTimeSumSeqNotS+"Compares:"+minCompSumSeqNotS));
 		}
 	}
 	
