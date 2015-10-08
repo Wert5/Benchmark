@@ -25,7 +25,8 @@ public class BenchmarkMain {
 			String midNotS= data.get(i/2);
 			String firstS=dataSorted.get(0);
 			String firstNotS=data.get(0);
-			String notThere="w";
+			String notThere=dataSorted.get(i-1);
+			String notThereNotS=data.get(i-1);
 			long TimeSumSeqS=0;
 			long TimeSumBin=0;
 			long TimeSumSeqNotS=0;
@@ -165,7 +166,7 @@ public class BenchmarkMain {
 				maxTimeSumSeqNotS=t2;
 			}
 			window.add(new JLabel("t(ns):"+t2+"Compares:"+comp));
-			window.add(new JLabel("NotThere"));
+			window.add(new JLabel("Last"));
 			window.repaint();
 			t1 =System.nanoTime();
 			comp=seqSearch(dataSorted,notThere,i);
@@ -206,7 +207,7 @@ public class BenchmarkMain {
 			window.add(new JLabel("t(ns):"+t2+"Compares:"+comp));
 			window.repaint();
 			t1 =System.nanoTime();
-			comp=seqSearch(data,notThere,i);
+			comp=seqSearch(data,notThereNotS,i);
 			t2=System.nanoTime()-t1;
 			TimeSumSeqNotS+=t2;
 			CompSumSeqNotS+=comp;
@@ -227,8 +228,10 @@ public class BenchmarkMain {
 			window.repaint();
 			for(int j=0;j<7;j++){
 				t1 =System.nanoTime();
-				CompSumSeqS+=comp=seqSearch(dataSorted,dataSorted.get((int)(Math.random()*i)),i);
-				TimeSumSeqS+=t2=System.nanoTime()-t1;
+				comp=seqSearch(dataSorted,dataSorted.get((int)(Math.random()*i)),i);
+				CompSumSeqS+=comp;
+				t2=System.nanoTime()-t1;
+				TimeSumSeqS+=t2;
 				if(minCompSumSeqS>comp){
 					minCompSumSeqS=comp;
 				}
@@ -246,8 +249,10 @@ public class BenchmarkMain {
 			window.repaint();
 			for(int j=0;j<7;j++){
 				t1 =System.nanoTime();
-				CompSumBin+=binarySearch(dataSorted,dataSorted.get((int)(Math.random()*i)),i);
-				TimeSumBin+=System.nanoTime()-t1;
+				comp=binarySearch(dataSorted,dataSorted.get((int)(Math.random()*i)),i);
+				CompSumBin+=comp;
+				t2=System.nanoTime()-t1;
+				TimeSumBin+=comp;
 				if(minCompSumBin>comp){
 					minCompSumBin=comp;
 				}
